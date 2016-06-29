@@ -1,0 +1,110 @@
+<% include header.html%>
+
+<style>
+  .img{margin:5px; border: 1px solid #ccc; float: left; width: 280px;}
+  .img:hover{ box-shadow :2px 2px 6px #999;} 
+  .img img{width: 100%; height: 240px;} 
+  .desc{ padding: 15px; text-align:center;}
+  .modal{
+      width: 100%; 
+      height: 100%; 
+      position: fixed; 
+      display: none; 
+      z-index: 1;
+      left: 0;
+      top: 0;
+      overflow: auto;
+      background-color: rgb(0,0,0); 
+      background-color: rgba(0,0,0,0.4); 
+      }
+  .popUp{
+    width: 80%;
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    height: 80%;
+    border: 1px solid #888;
+  }  
+  .close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+
+<div class="modal" id="idModal">
+  <div class="popUp">
+    <h3 id="h3-name"></h3>
+    <img src="" id="img-popup-1">
+  <span class="close" id="closePopup">x</span>
+
+  </div>
+</div>
+
+<script>
+  var modal = document.getElementById('idModal');
+  var closePop = document.getElementById("closePopup");
+  function popup(da){
+    modal.style.display = "block";
+    document.getElementById('h3-name').innerHTML = da.fullname;
+    document.getElementById('img-popup-1').src= da.photo;
+  }
+ closePop.onclick = function(){
+   modal.style.display = "none";
+ }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  } 
+</script>
+
+<div id="show"></div>
+<script type="text/babel">
+  class ShowUser extends React.Component{
+    constructor(){
+      super()
+      this.data = []
+      $.get('/test').done(this.ready.bind(this))            
+    }
+    popup1(d){
+      popup(d)
+    }
+    ready(data){
+            this.data = data
+            this.setState({})
+            }     
+    render(){
+      var user=[]
+      for(var i=0; i < this.data.length; i++){
+        user.push((
+        <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+          <div className='img' key={i} onClick={() => this.popup1(this.data[a]) }>
+            <img src={ this.data[i].photo } width="300" height="300"/> 
+            <div className="desc">{ this.data[i].fullname }</div>
+            <div className="desc">{ this.data[i].email }</div>
+          </div></div>
+          ))
+          let a=i
+      }
+      
+      return(
+        <div className="container" >
+          
+            { user }
+          
+        </div>
+      )
+    }
+  }
+  ReactDOM.render(<ShowUser/>
+    ,document.getElementById('show'))
+</script>
+
+<% include footer.html %>

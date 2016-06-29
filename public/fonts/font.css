@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Athiti-Regular';
+    src: url('Athiti-Regular.eot');
+    src: url('Athiti-Regular.eot?#iefix') format('embedded-opentype'),
+         url('Athiti-Regular.woff2') format('woff2'),
+         url('Athiti-Regular.woff') format('woff'),
+         url('Athiti-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Mitr-Regular';
+    src: url('Mitr-Regular.eot');
+    src: url('Mitr-Regular.eot?#iefix') format('embedded-opentype'),
+         url('Mitr-Regular.woff2') format('woff2'),
+         url('Mitr-Regular.woff') format('woff'),
+         url('Mitr-Regular.ttf') format('truetype');
+}
+
